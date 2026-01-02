@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Fetch_Metadata Case Study - A web-based application for extracting, storing, and sharing metadata from various file types. UX design case study by Kosisochukwu Ibute."
+    />
+    <title>Fetch_Metadata Case Study - Kosisochukwu Ibute</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Case Study Specific Styles - Same as Skill4Cash */
+      .case-study-hero {
+        padding: 140px 20px 50px;
+        background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .case-study-hero::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.1) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: float 20s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate(-30px, -30px) rotate(180deg);
+        }
+      }
+
+      .case-study-hero .container {
+        max-width: 900px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        transition: var(--transition);
+        font-size: 0.95rem;
+      }
+
+      .back-link:hover {
+        color: var(--primary-dark);
+        gap: 0.75rem;
+      }
+
+      .back-link i {
+        transition: var(--transition);
+      }
+
+      .back-link:hover i {
+        transform: translateX(-3px);
+      }
+
+      .case-study-logo {
+        font-size: 4rem;
+        font-weight: 800;
+        color: var(--text-dark);
+        margin-bottom: 1.5rem;
+        letter-spacing: -2px;
+        line-height: 1.2;
+      }
+
+      .case-study-logo .accent {
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .case-study-intro {
+        font-size: 1.25rem;
+        line-height: 1.8;
+        color: var(--text-light);
+        margin-bottom: 2rem;
+      }
+
+      .case-study-role {
+        font-size: 1.1rem;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+        line-height: 1.7;
+      }
+
+      .case-study-role strong {
+        color: var(--primary-color);
+      }
+
+      .hero-image-section {
+        padding: 0 20px 40px;
+        background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+      }
+
+      .hero-image-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .hero-image-wrapper {
+        width: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow-xl);
+        background: var(--bg-white);
+        padding: 2rem;
+      }
+
+      .hero-image-wrapper img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 12px;
+      }
+
+      .case-study-section {
+        padding: 100px 0;
+      }
+
+      .case-study-section-alt {
+        background: var(--bg-light);
+      }
+
+      .case-study-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .case-study-tag {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--primary-color);
+        border-radius: 50px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .case-study-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+      }
+
+      .case-study-subtitle {
+        font-size: 1.125rem;
+        color: var(--text-light);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.7;
+      }
+
+      .problem-intro {
+        margin-top: 3rem;
+        max-width: 100%;
+      }
+
+      .problem-divider-vertical {
+        width: 4px;
+        min-height: 100%;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+
+      .problem-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .problem-card {
+        background: var(--bg-white);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+      }
+
+      .problem-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .problem-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .problem-item {
+        color: var(--text-light);
+        line-height: 1.7;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .problem-item::before {
+        content: "•";
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        line-height: 1.7;
+      }
+
+      .research-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .research-card {
+        background: var(--bg-white);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+      }
+
+      .research-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .research-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(99, 102, 241, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .research-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--text-dark);
+      }
+
+      .research-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .research-item {
+        color: var(--text-light);
+        line-height: 1.7;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
+      .research-item::before {
+        content: "✓";
+        color: var(--primary-color);
+        font-weight: 700;
+        flex-shrink: 0;
+        line-height: 1.7;
+      }
+
+      .competitive-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .competitive-item {
+        background: var(--bg-white);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        text-align: center;
+        transition: var(--transition);
+      }
+
+      .competitive-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .competitive-number {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin: 0 auto 1rem;
+      }
+
+      .competitive-text {
+        color: var(--text-light);
+        line-height: 1.7;
+      }
+
+      .solutions-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .solution-card {
+        background: var(--bg-white);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+      }
+
+      .solution-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .solution-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+      }
+
+      .solution-description {
+        color: var(--text-light);
+        line-height: 1.7;
+      }
+
+      .scope-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .scope-item {
+        background: var(--bg-white);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        transition: var(--transition);
+      }
+
+      .scope-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .scope-number {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        background: var(--gradient-primary);
+        color: white;
+      }
+
+      .scope-text {
+        flex: 1;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: var(--text-dark);
+      }
+
+      .outcomes-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .outcome-card {
+        background: var(--bg-white);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        text-align: center;
+      }
+
+      .outcome-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .outcome-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: rgba(99, 102, 241, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        font-size: 2rem;
+        margin: 0 auto 1.5rem;
+      }
+
+      .outcome-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+      }
+
+      .outcome-description {
+        color: var(--text-light);
+        line-height: 1.7;
+      }
+
+      .limitations-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .limitation-card {
+        background: var(--bg-white);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+      }
+
+      .limitation-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .limitation-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--text-dark);
+      }
+
+      .limitation-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .limitation-item {
+        color: var(--text-light);
+        line-height: 1.7;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .limitation-item::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+
+      .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .meta-item i {
+        color: var(--primary-color);
+        font-size: 1.25rem;
+      }
+
+      .meta-item span {
+        color: var(--text-light);
+        font-size: 0.95rem;
+      }
+
+      .meta-item strong {
+        color: var(--text-dark);
+        font-weight: 600;
+      }
+
+      @media (max-width: 968px) {
+        .problem-grid,
+        .research-grid,
+        .solutions-grid,
+        .scope-grid,
+        .outcomes-grid,
+        .limitations-grid,
+        .competitive-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .case-study-title {
+          font-size: 2rem;
+        }
+
+        .case-study-logo {
+          font-size: 2.5rem;
+        }
+      }
+
+      /* Video Section */
+      .videos-section {
+        padding: 100px 0;
+        background: var(--bg-light);
+        min-height: auto;
+      }
+
+      .videos-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        margin-top: 3rem;
+      }
+
+      .video-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .video-row.reverse {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .video-row.reverse .video-content {
+        order: 1;
+      }
+
+      .video-row.reverse .video-item {
+        order: 2;
+      }
+
+      .video-item {
+        background: var(--bg-white);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-lg);
+        transition: var(--transition);
+        overflow: hidden;
+      }
+
+      .video-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .video-item-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .video-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .video-content h3 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+      }
+
+      .video-content p {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--text-light);
+      }
+
+      .video-player-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 9 / 16; /* Portrait aspect ratio for mobile screens */
+        max-height: 60vh; /* Maximum 60% of viewport height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: #000;
+        overflow: hidden;
+        margin: 0 auto;
+      }
+
+      .video-player-wrapper video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 12px;
+        object-fit: contain;
+      }
+
+      /* Progress Indicator */
+      .progress-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: var(--gradient-primary);
+        z-index: 1001;
+        transition: width 0.1s ease-out;
+        box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+      }
+
+      /* Scroll-triggered Animations */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .animate-on-scroll-delay-1 {
+        transition-delay: 0.1s;
+      }
+
+      .animate-on-scroll-delay-2 {
+        transition-delay: 0.2s;
+      }
+
+      .animate-on-scroll-delay-3 {
+        transition-delay: 0.3s;
+      }
+
+      .animate-fade-in {
+        opacity: 0;
+        transition: opacity 0.8s ease-out;
+      }
+
+      .animate-fade-in.animated {
+        opacity: 1;
+      }
+
+      .animate-scale-in {
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      .animate-scale-in.animated {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      @media (max-width: 768px) {
+        .case-study-hero {
+          padding: 120px 20px 60px;
+        }
+
+        .case-study-section {
+          padding: 80px 0;
+        }
+
+        .case-study-logo {
+          font-size: 2rem;
+        }
+
+        .video-player-wrapper {
+          max-height: 50vh; /* Smaller on mobile */
+        }
+
+        .video-row {
+          grid-template-columns: 1fr;
+        }
+
+        .video-row.reverse .video-content,
+        .video-row.reverse .video-item {
+          order: unset;
+        }
+
+        .user-flow-image-wrapper {
+          padding: 1.5rem;
+        }
+      }
+
+      /* User Flow Section Styles */
+      .user-flow-container {
+        max-width: 1400px;
+        margin: 3rem auto 0;
+      }
+
+      .user-flow-text-content {
+        max-width: 900px;
+        margin: 0 auto 3rem;
+        text-align: center;
+      }
+
+      .user-flow-text-content p {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--text-light);
+        margin: 0;
+      }
+
+      .user-flow-image-wrapper {
+        width: 100%;
+        background: var(--bg-white);
+        padding: 2.5rem;
+        border-radius: 24px;
+        box-shadow: var(--shadow-xl);
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(99, 102, 241, 0.1);
+      }
+
+      .user-flow-image-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-primary);
+      }
+
+      .user-flow-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+      }
+
+      .user-flow-image:hover {
+        transform: scale(1.01);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Screens Gallery Section */
+      .screens-gallery-section {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .screens-gallery-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.05) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: float 20s ease-in-out infinite;
+      }
+
+      .screens-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        margin-top: 4rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .screens-gallery-item {
+        background: var(--bg-white);
+        padding: 2.5rem;
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
+        transition: var(--transition);
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(99, 102, 241, 0.1);
+      }
+
+      .screens-gallery-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-primary);
+        transform: scaleX(0);
+        transition: var(--transition);
+      }
+
+      .screens-gallery-item:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-xl);
+        border-color: rgba(99, 102, 241, 0.3);
+      }
+
+      .screens-gallery-item:hover::before {
+        transform: scaleX(1);
+      }
+
+      .screens-gallery-item img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        display: block;
+        border-radius: 16px;
+        transition: var(--transition);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        object-fit: contain;
+      }
+
+      .screens-gallery-item:hover img {
+        transform: scale(1.03);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      .screens-gallery-title {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-top: 2rem;
+        text-align: center;
+        position: relative;
+        padding-top: 1.5rem;
+      }
+
+      .screens-gallery-title::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+      }
+
+      @media (max-width: 968px) {
+        .screens-gallery {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Lofi Section */
+      .lofi-section {
+        padding: 100px 0;
+        background: var(--bg-white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .lofi-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.05) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: float 20s ease-in-out infinite;
+      }
+
+      .lofi-gallery {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        margin-top: 4rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .lofi-item {
+        background: var(--bg-light);
+        padding: 2rem;
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
+        transition: var(--transition);
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(99, 102, 241, 0.1);
+      }
+
+      .lofi-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-primary);
+        transform: scaleX(0);
+        transition: var(--transition);
+      }
+
+      .lofi-item:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-xl);
+        border-color: rgba(99, 102, 241, 0.3);
+      }
+
+      .lofi-item:hover::before {
+        transform: scaleX(1);
+      }
+
+      .lofi-item img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        display: block;
+        border-radius: 16px;
+        transition: var(--transition);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        object-fit: contain;
+      }
+
+      .lofi-item:hover img {
+        transform: scale(1.03);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      .lofi-title {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-top: 2rem;
+        text-align: center;
+        position: relative;
+        padding-top: 1.5rem;
+      }
+
+      .lofi-title::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+      }
+
+      /* Prototype Section */
+      .prototype-section {
+        background: var(--bg-light);
+        padding: 100px 0;
+        text-align: center;
+      }
+
+      .prototype-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .prototype-text {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+      }
+
+      .prototype-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2rem;
+        background: var(--gradient-primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: var(--transition);
+        box-shadow: var(--shadow-md);
+      }
+
+      .prototype-link:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Progress Indicator -->
+    <div class="progress-indicator" id="progress-indicator"></div>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <a href="index.html#home">Kosi Nina</a>
+        </div>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="index.html#home" class="nav-link">Home</a></li>
+          <li><a href="index.html#about" class="nav-link">About</a></li>
+          <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+          <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+          <li>
+            <a href="index.html#experience" class="nav-link">Experience</a>
+          </li>
+          <li><a href="index.html#education" class="nav-link">Education</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-toggle" id="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Case Study Hero -->
+    <section class="case-study-hero">
+      <div class="container">
+        <a href="index.html#projects" class="back-link">
+          <i class="fas fa-arrow-left"></i>
+          Back to Projects
+        </a>
+        <h1 class="case-study-logo">
+          Fetch<span class="accent">_</span>Metadata
+        </h1>
+        <p class="case-study-intro">
+          In an era where data drives decision-making, innovation, and security,
+          the ability to understand and interpret data has become more valuable
+          than ever. Data quality rooted in metadata is essential for ensuring
+          reliability, regulatory compliance, and user trust. Fetch_Metadata is
+          a web-based application built to help users extract, store, share, and
+          revisit metadata from various file types.
+        </p>
+        <p class="case-study-role">
+          <strong>Project Overview:</strong> This case study outlines the
+          problem space, research approach, design solutions, development scope,
+          impact, and key outcomes of the project.
+        </p>
+        <div class="project-meta">
+          <div class="meta-item">
+            <i class="fas fa-globe"></i>
+            <span><strong>Platform:</strong> Responsive Web Application</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-tag"></i>
+            <span><strong>Category:</strong> Data Management</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero Image Section -->
+    <section class="hero-image-section">
+      <div class="hero-image-container">
+        <div class="hero-image-wrapper">
+          <img src="MetaData.png" alt="Fetch_Metadata Application" />
+        </div>
+      </div>
+    </section>
+
+    <!-- The Challenge Section -->
+    <section class="case-study-section">
+      <div class="container">
+        <div class="case-study-header">
+          <span class="case-study-tag">The Challenge</span>
+          <h2 class="case-study-title">The Problem Space</h2>
+        </div>
+        <div class="problem-intro">
+          <p
+            class="case-study-subtitle"
+            style="text-align: left; margin: 0; max-width: 100%"
+          >
+            Users across industries in particular photographers, security
+            analysts, and data-focused professionals frequently work with files
+            that hold valuable hidden information (metadata). However:
+          </p>
+        </div>
+        <div
+          class="problem-card"
+          style="
+            margin-top: 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+          "
+        >
+          <div class="problem-divider-vertical"></div>
+          <ul class="problem-list" style="flex: 1; margin-top: 0">
+            <li class="problem-item">
+              Many existing tools are fragmented, complex, or lack storage
+              capabilities.
+            </li>
+            <li class="problem-item">
+              Users often need to revisit metadata, but temporary metadata
+              viewers don't store it.
+            </li>
+            <li class="problem-item">
+              There is no simple way for everyday users to share or download
+              metadata securely.
+            </li>
+            <li class="problem-item">
+              Data misuse is possible without user authentication and
+              accountability.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Understanding the Users Section -->
+    <section class="case-study-section case-study-section-alt">
+      <div class="container">
+        <div class="case-study-header">
+          <span class="case-study-tag">Understanding the Users</span>
+          <h2 class="case-study-title">Research Approach</h2>
+        </div>
+        <p class="case-study-subtitle" style="margin-bottom: 2rem">
+          To ensure the solution aligned with real user needs, we followed a
+          structured research process:
+        </p>
+        <div class="research-grid">
+          <div class="research-card">
+            <div class="research-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 class="research-title">User Interviews & Survey</h3>
+            <ul class="research-list">
+              <li class="research-item">
+                5 Photographers who needed quick access to file details (e.g.,
+                EXIF data) for professional documentation.
+              </li>
+              <li class="research-item">
+                5 Security personnel who needed accurate file information for
+                cyber investigations.
+              </li>
+              <li class="research-item">
+                Shared online surveys to general users and 50% wanted a simple
+                way to upload and inspect files.
+              </li>
+            </ul>
+          </div>
+          <div class="research-card">
+            <div class="research-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3 class="research-title">Key Insights</h3>
+            <ul class="research-list">
+              <li class="research-item">
+                Users wanted metadata instantly, "no extra clicks."
+              </li>
+              <li class="research-item">
+                File history was important: "I want to revisit files without
+                re-uploading." said most of the general users.
+              </li>
+              <li class="research-item">
+                Trust and security were major concerns.
+              </li>
+              <li class="research-item">
+                The interface had to be straightforward and minimalistic.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Competitive Analysis Section -->
+    <section class="case-study-section">
+      <div class="container">
+        <div class="case-study-header">
+          <span class="case-study-tag">Research</span>
+          <h2 class="case-study-title">Competitive Analysis</h2>
+        </div>
+        <p class="case-study-subtitle" style="margin-bottom: 2rem">
+          We reviewed 5 popular metadata extraction tools: ExifTool, Apache
+          Tika, ExifMeta, Snipinsta File Metadata Viewer, WuTools File Metadata
+          Viewer
+        </p>
+        <div class="competitive-grid">
+          <div class="competitive-item">
+            <div class="competitive-number">1</div>
+            <p class="competitive-text">
+              Most do not store files or saved results.
+            </p>
+          </div>
+          <div class="competitive-item">
+            <div class="competitive-number">2</div>
+            <p class="competitive-text">
+              Almost none offer user accounts or customization.
+            </p>
+          </div>
+          <div class="competitive-item">
+            <div class="competitive-number">3</div>
+            <p class="competitive-text">
+              Limited sharing and download capabilities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Design Solutions Section -->
+    <section class="case-study-section case-study-section-alt">
+      <div class="container">
+        <div class="case-study-header">
+          <span class="case-study-tag">Research Implementation</span>
+          <h2 class="case-study-title">Design Solutions</h2>
+          <p class="case-study-subtitle">
+            Based on research insights, the design focused on simplicity,
+            performance, and security.
+          </p>
+        </div>
+        <div class="solutions-grid">
+          <div class="solution-card">
+            <h3 class="solution-title">Information Architecture</h3>
+            <p class="solution-description">
+              We structured the app around four core user flows:
+            </p>
+            <ul class="research-list" style="margin-top: 1rem">
+              <li class="research-item">Upload & View Metadata</li>
+              <li class="research-item">Manage Saved Files</li>
+              <li class="research-item">Share or Download Metadata</li>
+              <li class="research-item">Account Management</li>
+            </ul>
+          </div>
+          <div class="solution-card">
+            <h3 class="solution-title">UI/UX Design Principles</h3>
+            <ul class="research-list">
+              <li class="research-item">
+                Zero-click metadata generation. Automatic extraction after
+                upload.
+              </li>
+              <li class="research-item">
+                Minimalist interface. Reduces friction and cognitive load.
+              </li>
+              <li class="research-item">
+                Clear typography and spacing. Improves readability.
+              </li>
+              <li class="research-item">
+                Visual hierarchy. Highlights file details and metadata first.
+              </li>
+            </ul>
+          </div>
+          <div class="solution-card">
+            <h3 class="solution-title">Security-Driven Experience</h3>
+            <ul class="research-list">
+              <li class="research-item">
+                Mandatory user accounts to track uploads and reduce misuse.
+              </li>
+              <li class="research-item">
+                Encrypted storage for uploaded files and metadata.
+              </li>
+              <li class="research-item">
+                Access controls to ensure ethical use.
+              </li>
+            </ul>
+          </div>
+          <div class="solution-card">
+            <h3 class="solution-title">Responsive Web Design</h3>
+            <p class="solution-description">
+              Although the application is web-first, screens were designed to be
+              mobile-friendly for accessibility.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Scope Section -->
+    <section class="case-study-section">
+      <div class="container">
+        <div class="case-study-header">
+          <span class="case-study-tag">Features</span>
+          <h2 class="case-study-title">Project Scope</h2>
+        </div>
+        <div class="scope-grid">
+          <div class="scope-item">
+            <div class="scope-number">1</div>
+            <div class="scope-text">
+              User Authentication: Create an account and log in securely.
+            </div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-number">2</div>
+            <div class="scope-text">
+              File Upload: Supports PDF, TXT, CSV, JSON, JPG, JPEG.
+            </div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-number">3</div>
+            <div class="scope-text">
+              Instant Metadata Generation: Automatic extraction upon upload.
+            </div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-number">4</div>
+            <div class="scope-text">
+              Account Settings: Edit passwords and manage profiles.
+            </div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-number">5</div>
+            <div class="scope-text">
+              File Management: View, save, and re-access previously uploaded
+              files.
+            </div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-number">6</div>
+            <div class="scope-text">
+              Metadata Sharing & Downloading: Export metadata for ethical usage.
+            </div>
+          </div>
+          <div class="scope-item">
+            <div class="scope-number">7</div>
+            <div class="scope-text">
+              Feedback System: Users can leave app reviews.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Outcome & Impact Section -->
+    <section class="case-study-section case-study-section-alt">
+      <div class="container">
+        <div class="case-study-header">
+          <span class="case-study-tag">Impact</span>
+          <h2 class="case-study-title">Key Outcome & Impact</h2>
+        </div>
+        <div class="outcomes-grid">
+          <div class="outcome-card">
+            <div class="outcome-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <h3 class="outcome-title">Improved User Efficiency</h3>
+            <p class="outcome-description">
+              Users accessed metadata 3x faster compared to competitors.
+              Automatic metadata generation eliminated unnecessary user actions.
+            </p>
+          </div>
+          <div class="outcome-card">
+            <div class="outcome-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="outcome-title">Increased User Trust & Security</h3>
+            <p class="outcome-description">
+              Required logins reduced anonymous misuse. Secure storage increased
+              data safety for sensitive files.
+            </p>
+          </div>
+          <div class="outcome-card">
+            <div class="outcome-icon">
+              <i class="fas fa-smile"></i>
+            </div>
+            <h3 class="outcome-title">High User Satisfaction</h3>
+            <p class="outcome-description">
+              50% of early testers rated the app as easy to use. Photographers
+              appreciated the ability to save and revisit metadata.
+            </p>
+          </div>
+          <div class="outcome-card">
+            <div class="outcome-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <h3 class="outcome-title">
+              Streamlined Workflow for Professionals
+            </h3>
+            <p class="outcome-description">
+              Saved files enabled quick retrieval for future tasks.
+              Share/download features supported collaborative workflows.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section class="videos-section" id="videos-section">
+      <div class="container">
+        <div class="case-study-header">
+          <h2 class="case-study-title">App Experience</h2>
+          <p class="case-study-subtitle">
+            Watch how users interact with the Fetch_Metadata platform
+          </p>
+        </div>
+        <div class="videos-grid">
+          <!-- Web Experience Row - Video on Left, Text on Right -->
+          <div class="video-row">
+            <div class="video-item">
+              <h3 class="video-item-title">Metadata Web Experience</h3>
+              <div class="video-player-wrapper">
+                <video id="web-video" muted loop playsinline preload="auto">
+                  <source
+                    src="Metadata screen Desktop.mp4"
+                    type="video/quicktime"
+                  />
+                  <source src="Metadata screen Desktop.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+            <div class="video-content">
+              <h3>Web Experience</h3>
+              <p>
+                <!-- Add your description text here about the Web Experience video -->
+              </p>
+            </div>
+          </div>
+
+          <!-- Mobile Experience Row - Text on Left, Video on Right -->
+          <div class="video-row reverse">
+            <div class="video-content">
+              <h3>Mobile Experience</h3>
+              <p>
+                <!-- Add your description text here about the Mobile Experience video -->
+              </p>
+            </div>
+            <div class="video-item">
+              <h3 class="video-item-title">Metadata Mobile Experience</h3>
+              <div class="video-player-wrapper">
+                <video id="mobile-video" muted loop playsinline preload="auto">
+                  <source
+                    src="Metadata screen Phone.mp4"
+                    type="video/quicktime"
+                  />
+                  <source src="Metadata screen Phone.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Limitations & Future Improvements Section -->
+    <section class="case-study-section">
+      <div class="container">
+        <div class="case-study-header">
+          <span class="case-study-tag">The Future</span>
+          <h2 class="case-study-title">
+            System Limitations & Future Improvements
+          </h2>
+        </div>
+        <div class="limitations-grid">
+          <div class="limitation-card">
+            <h3 class="limitation-title">Current Limitations</h3>
+            <ul class="limitation-list">
+              <li class="limitation-item">
+                Available only as a web application.
+              </li>
+              <li class="limitation-item">
+                Metadata cannot be edited inside the system.
+              </li>
+              <li class="limitation-item">
+                Limited file type support (PDF, TXT, CSV, JSON, JPG, JPEG).
+              </li>
+            </ul>
+          </div>
+          <div class="limitation-card">
+            <h3 class="limitation-title">Future Opportunities</h3>
+            <ul class="limitation-list">
+              <li class="limitation-item">
+                Develop a mobile app for iOS/Android.
+              </li>
+              <li class="limitation-item">
+                Introduce metadata editing capabilities.
+              </li>
+              <li class="limitation-item">
+                Add support for more file types (audio, video, RAW images).
+              </li>
+              <li class="limitation-item">
+                Implement metadata visualizations (graphs, timelines, etc.).
+              </li>
+              <li class="limitation-item">
+                Add AI-powered metadata predictions or summaries.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- User Flow Section -->
+    <section class="case-study-section case-study-section-alt">
+      <div class="container">
+        <div class="case-study-header">
+          <h2 class="case-study-title">User Flow</h2>
+        </div>
+
+        <div class="user-flow-container">
+          <div class="user-flow-text-content">
+            <p>
+              The user flow for Fetch_Metadata was designed to minimize friction
+              and maximize efficiency. We mapped out the complete journey from
+              initial account creation through metadata extraction, storage, and
+              sharing. The flow prioritizes zero-click metadata generation,
+              ensuring users get instant results upon file upload.
+            </p>
+            <p style="margin-top: 1.5rem">
+              Key user paths include seamless authentication, intuitive file
+              upload with automatic metadata extraction, easy file management
+              with saved history, and secure sharing capabilities. Each flow was
+              validated through user testing to ensure clarity and reduce
+              cognitive load, especially for users with varying levels of
+              technical expertise.
+            </p>
+          </div>
+
+          <div class="user-flow-image-wrapper">
+            <img
+              src="Userflow metadata.png"
+              alt="Fetch_Metadata User Flow Diagram"
+              class="user-flow-image"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metadata Lofi Section -->
+    <section class="lofi-section">
+      <div class="container">
+        <div class="case-study-header">
+          <span class="case-study-tag">Wireframes</span>
+          <h2 class="case-study-title">Metadata Lofi</h2>
+          <p class="case-study-subtitle">
+            Low-fidelity wireframes exploring initial concepts and information
+            architecture
+          </p>
+        </div>
+        <div class="lofi-gallery">
+          <div class="lofi-item" style="max-width: 100%; padding: 1.5rem">
+            <img
+              src="Metadata Lofi.png"
+              alt="Metadata Low-Fidelity Wireframes"
+              style="
+                width: 100%;
+                height: auto;
+                max-height: 90vh;
+                object-fit: contain;
+              "
+            />
+            <p class="lofi-title">Metadata Lofi</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Some Screens -->
+    <section class="screens-gallery-section">
+      <div class="container">
+        <div class="case-study-header">
+          <span class="case-study-tag">Design</span>
+          <h2 class="case-study-title">Some Screens</h2>
+          <p class="case-study-subtitle">
+            A selection of key screens showcasing the user experience across
+            different features and user flows
+          </p>
+        </div>
+        <div class="screens-gallery" style="grid-template-columns: 1fr">
+          <div
+            class="screens-gallery-item"
+            style="max-width: 100%; padding: 1.5rem"
+          >
+            <img
+              src="Metadata screen.png"
+              alt="Fetch_Metadata Application Screens"
+              style="
+                width: 100%;
+                height: auto;
+                max-height: 90vh;
+                object-fit: contain;
+              "
+            />
+            <p class="screens-gallery-title">Fetch_Metadata Screens</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prototype Link -->
+    <section class="prototype-section">
+      <div class="container">
+        <div class="prototype-content">
+          <span class="case-study-tag">Prototype</span>
+          <h2 class="case-study-title" style="margin-top: 1rem">
+            Explore the Design
+          </h2>
+          <p class="prototype-text">
+            For convenience, you can explore the prototype by clicking the link
+            below to access the interactions.
+          </p>
+          <a
+            href="https://www.figma.com/proto/M72dHcHNJItdlvUDyYeva7/METADATA-D?node-id=254-449&p=f&t=d4JZD2KAlz0fnBl6-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=242%3A271&show-proto-sidebar=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="prototype-link"
+          >
+            <i class="fab fa-figma"></i>
+            View Figma Prototype
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <p>&copy; 2024 Kosisochukwu Ibute. All rights reserved.</p>
+          <p>
+            Designed with <i class="fas fa-heart"></i> for exceptional user
+            experiences
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+      // Progress Indicator
+      window.addEventListener("scroll", () => {
+        const windowHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        document.getElementById("progress-indicator").style.width =
+          scrolled + "%";
+      });
+
+      // Scroll-triggered Animations
+      document.addEventListener("DOMContentLoaded", () => {
+        // Auto-add animation classes to key elements
+        const headers = document.querySelectorAll(".case-study-header");
+        const cards = document.querySelectorAll(
+          ".problem-card, .research-card, .solution-card, .outcome-card, .final-reflection"
+        );
+
+        headers.forEach((header) => {
+          if (!header.classList.contains("animate-on-scroll")) {
+            header.classList.add("animate-on-scroll");
+          }
+        });
+
+        cards.forEach((card, index) => {
+          if (!card.classList.contains("animate-on-scroll")) {
+            card.classList.add("animate-on-scroll");
+            if (index % 2 === 1) {
+              card.classList.add("animate-on-scroll-delay-1");
+            }
+          }
+        });
+
+        const animatedElements = document.querySelectorAll(
+          ".animate-on-scroll, .animate-fade-in, .animate-scale-in"
+        );
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("animated");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+          }
+        );
+
+        animatedElements.forEach((element) => {
+          observer.observe(element);
+        });
+      });
+
+      // Auto-play videos when section is visible
+      document.addEventListener("DOMContentLoaded", function () {
+        const videosSection = document.getElementById("videos-section");
+        const webVideo = document.getElementById("web-video");
+        const mobileVideo = document.getElementById("mobile-video");
+
+        if (videosSection && webVideo && mobileVideo) {
+          // Set videos to muted for autoplay (browser requirement)
+          webVideo.muted = true;
+          mobileVideo.muted = true;
+
+          // Intersection Observer to play videos when section is visible
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  // Play videos when section is visible
+                  webVideo.play().catch((error) => {
+                    console.log("Web video autoplay prevented:", error);
+                  });
+                  mobileVideo.play().catch((error) => {
+                    console.log("Mobile video autoplay prevented:", error);
+                  });
+                } else {
+                  // Pause videos when section is not visible
+                  webVideo.pause();
+                  mobileVideo.pause();
+                }
+              });
+            },
+            { threshold: 0.3 } // Trigger when 30% of section is visible
+          );
+
+          observer.observe(videosSection);
+
+          // Try to play immediately if section is already visible
+          setTimeout(() => {
+            const rect = videosSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isVisible) {
+              webVideo.play().catch(() => {});
+              mobileVideo.play().catch(() => {});
+            }
+          }, 500);
+        }
+      });
+    </script>
+  </body>
+</html>
