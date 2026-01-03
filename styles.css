@@ -1485,6 +1485,25 @@ section {
         grid-template-columns: 1fr;
     }
 
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-bar {
+        height: 10px;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .skill-progress {
+        height: 100% !important;
+        min-height: 10px;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
     .education-item {
         flex-direction: column;
         text-align: center;
@@ -1496,6 +1515,27 @@ section {
 
     .certifications-grid {
         grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-bar {
+        height: 10px;
+        display: block;
+        visibility: visible;
+    }
+
+    .skill-progress {
+        height: 100%;
+        min-height: 10px;
+        display: block;
+        visibility: visible;
+    }
+
+    .skill-item {
+        gap: 0.75rem;
     }
 }
 

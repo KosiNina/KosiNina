@@ -128,7 +128,7 @@ const skillsObserver = new IntersectionObserver((entries) => {
             skillsObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.5 });
+}, { threshold: 0.1 }); // Lower threshold for mobile devices
 
 const skillsSection = document.getElementById('skills');
 if (skillsSection) {
