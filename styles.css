@@ -623,6 +623,7 @@ section {
     border-radius: 10px;
     width: 0;
     transition: width 1s ease-out;
+    will-change: width;
 }
 
 .tools-grid {
@@ -1489,19 +1490,51 @@ section {
         grid-template-columns: 1fr;
     }
 
+    .skill-category {
+        padding: 1.5rem;
+    }
+
+    .skill-items {
+        gap: 1.25rem;
+    }
+
+    .skill-item {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        visibility: visible !important;
+    }
+
+    .skill-name {
+        display: block !important;
+        visibility: visible !important;
+    }
+
     .skill-bar {
-        height: 10px;
+        height: 10px !important;
+        width: 100% !important;
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        background: var(--bg-light) !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+        position: relative !important;
     }
 
     .skill-progress {
         height: 100% !important;
-        min-height: 10px;
+        min-height: 10px !important;
+        width: 0;
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        background: var(--gradient-primary) !important;
+        border-radius: 10px !important;
+        position: relative !important;
+        z-index: 1 !important;
+        transition: width 1s ease-out !important;
+        will-change: width !important;
     }
 
     .education-item {
@@ -1515,27 +1548,6 @@ section {
 
     .certifications-grid {
         grid-template-columns: 1fr;
-    }
-
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .skill-bar {
-        height: 10px;
-        display: block;
-        visibility: visible;
-    }
-
-    .skill-progress {
-        height: 100%;
-        min-height: 10px;
-        display: block;
-        visibility: visible;
-    }
-
-    .skill-item {
-        gap: 0.75rem;
     }
 }
 

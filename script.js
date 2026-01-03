@@ -110,12 +110,17 @@ animateElements.forEach(el => {
 const skillBars = document.querySelectorAll('.skill-progress');
 
 const animateSkillBars = () => {
-    skillBars.forEach(bar => {
+    skillBars.forEach((bar, index) => {
         const width = bar.getAttribute('data-width');
         if (width) {
+            // Reset to 0 first to ensure animation works
+            bar.style.width = '0%';
+            // Force reflow to ensure the reset is applied
+            void bar.offsetHeight;
+            // Animate to target width with slight delay for staggered effect
             setTimeout(() => {
                 bar.style.width = width + '%';
-            }, 200);
+            }, 200 + (index * 100));
         }
     });
 };
